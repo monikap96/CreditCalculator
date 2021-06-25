@@ -1,18 +1,24 @@
 <!doctype html>
-<html  xmlns="http://www.w3.org/1999/xhtml">
+<?php 
+    require_once dirname(__FILE__) .'/../../config.php';
+    include _ROOT_PATH.'/templates/top.php';
+?>
+<!--<html  xmlns="http://www.w3.org/1999/xhtml">
     <head>
         <link rel="stylesheet" href="https://unpkg.com/purecss@2.0.6/build/pure-min.css" />
     </head>
-    <body>
-        <div style="margin: auto;
+    <body>-->
+        <div id="main login" style="margin: auto;
                 width: 500px;
                 padding: 50px;
+                padding-top: 150px;
                 vertical-align: middle";>
             <form class="pure-form pure-form-stacked" action='<?php echo (_APP_ROOT); ?>/app/security/login.php' method="post">
                 <label for="username-or-email">Username or Email</label>
                 <input type="text" id="login" name="login" value="<?php out($form['login']);?>"/>
                 <label for="password">Password</label>
                 <input type="password" id="password" name="password" />
+                <br>
                 <input type="submit" class="pure-button pure-button-primary" value="Sign in"/>
             </form>
             <hr>
@@ -35,4 +41,7 @@
         </div>
     </body>
 </html>
+<?php //dół strony z szablonu 
+include _ROOT_PATH.'/templates/bottom.php';
+?>
 
