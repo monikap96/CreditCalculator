@@ -1,0 +1,56 @@
+{extends file="../templates/mainTemplate.html"}
+
+{block name=content}
+
+<div id="main" class="wrapper style1">
+    <div class="container">
+        <a href="{$app_root}/app/security/logout.php"  class="pure-button">Logout</a>
+        <br/><br/>
+        <header class="major">
+            <h2>Kalkulator</h2>
+        </header>
+
+        <form class="cta" action="{$app_url}/app/credit_calc.php" method="post">
+            <div>
+                <div class="col-6 col-12-xsmall">    
+                    <label for="id_amount">Kwota jaką chcesz otrzymać: </label>
+                    <input id="id_amount" type="text" name="amount" value="{$values['amount']|default: ''}" />
+                <br /><br/>
+                    <label for="id_year">Na ile lat?: </label>
+                    <input id="id_year" type="text" name="year" value="{$values['year']|default: ''}"/>
+                <br /><br/>
+                    <label for="id_percent">Oprocentowanie: </label>
+                    <input id="id_percent" type="text" name="percent" value="{$values['percent']|default: ''}" />
+                    <br /><br/>
+                </div>
+            </div>
+                <input type="submit" value="Oblicz" class="pure-button-primary pure-button"/>
+
+        </form>	
+        
+        {if (isset($CalcMessages))} 
+            {if (count ( $CalcMessages ) > 0)} 
+                <ol style="margin: auto; padding: 10px 10px 10px 30px; border-radius: 5px; background-color: #f88; width:400px;">
+                {foreach  $CalcMessages as $CalcMessage}
+                {strip}
+                        <li>{$CalcMessage}</li>
+                {/strip}
+                {/foreach}
+                </ol>
+            {/if}
+        {/if}
+        
+        {if (isset($monthlyRate))}
+        <div style="margin: auto; padding: 10px; border-radius: 5px; background-color: #ff0; width:500px; color: #000" >
+            Miesięczna rata do zapłaty: {$monthlyRate|string_format:"%.2f"|default: ''} zł
+                    {/if}
+                     <br>
+          
+            {if (isset($allRates))}
+            Całkowita kwota do zapłaty w ciągu całego okresu kredytowego: {$allRates|string_format:"%.2f"|default: ''} zł
+            {/if}
+        </div>
+    </div>
+</div>    
+
+{/block}

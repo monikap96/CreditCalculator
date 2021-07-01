@@ -1,6 +1,6 @@
 <?php
 require_once dirname(__FILE__).'/../config.php';
-
+require_once _ROOT_PATH.'/lib/smarty/Smarty.class.php';
 include _ROOT_PATH."/app/security/checkRole.php";
 
 $values = array();
@@ -55,6 +55,23 @@ if(validateValues($values, $CalcMessages)){
     countCreditValues($values, $CalcMessages, $monthlyRate, $allRates);
 }
 
-include 'credit_calc_view.php';
+$smarty = new Smarty();
+$smarty->assign('app_url',_APP_URL);
+$smarty->assign('app_root',_APP_ROOT);
+$smarty->assign('root_path',_ROOT_PATH);
+
+$smarty->assign('form',$form);
+$smarty->assign('CalcMessages',$CalcMessages);
+$smarty->assign('values',$values);
+
+if(isset($monthlyRate)){
+    $smarty->assign('monthlyRate',$monthlyRate);
+}
+
+if(isset($allRates)){
+    $smarty->assign('allRates',$allRates);
+}
+
+$smarty->display(_ROOT_PATH.'/app/credit_calc.html');
 
 ?>
